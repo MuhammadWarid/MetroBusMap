@@ -8,12 +8,16 @@ angular.module('controllers', [])
 .controller('MapCtrl', function($scope, $state, $cordovaGeolocation, $ionicLoading, GooglePlacesService){
   // Central Park location
   var maputo = {
-    lat: -25.953724,
-    lng: 32.588711
+    lat: -5.953724,
+    lng: 2.588711
   };
 
   $scope.mbclient = {} ;
 
+  // $scope.dummyDestination ={
+  //   lat1: -25.973250,
+  //   lng1: 2.572030
+  // }
 
   $scope.customMarkers = [
     {
@@ -140,12 +144,12 @@ angular.module('controllers', [])
 
 
 
-  $scope.tryGeoLocation = function(){
-    $ionicLoading.show({
-      template: 'Getting current position ...'
-    });
+  // $scope.tryGeoLocation = function(){
+  //   $ionicLoading.show({
+  //     template: 'Getting current position ...'
+  //   });
 
-  }
+  // }
 
    
 
@@ -155,26 +159,30 @@ angular.module('controllers', [])
   //     destination: "MCG Melbourne, Australia",
   //      showList: false
   // }
-  //   }
-    var request = {
-      origin: $scope.directions.origin,
-      destination: $scope.directions.destination,
-      travelMode: google.maps.DirectionsTravelMode.WALKING
-    };
-    
-    $scope.mbclient = $scope.directions.origin;
-    console.log (mbclient);
+    // }
 
-    directionsService.route(request, function (response, status) {
-      if (status === google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
-        directionsDisplay.setMap($scope.map.control.getGMap());
-        directionsDisplay.setPanel(document.getElementById('directionsList'));
-        $scope.directions.showList = true;
-      } else {
-        alert('Google route unsuccesfull!');
-      }
-    });
+  // $scope.dummyDestination = $scope.directions.destination;
+
+    // var request = {
+    //   origin: $scope.directions.origin,
+    //   destination: $scope.directions.destination,
+    //   travelMode: google.maps.DirectionsTravelMode.WALKING
+    // };
+    
+    
+    // $scope.mbclient = $scope.directions.origin;
+    // console.log (mbclient);
+
+    // directionsService.route(request, function (response, status) {
+    //   if (status === google.maps.DirectionsStatus.OK) {
+    //     directionsDisplay.setDirections(response);
+    //     directionsDisplay.setMap($scope.map.control.getGMap());
+    //     directionsDisplay.setPanel(document.getElementById('directionsList'));
+    //     $scope.directions.showList = true;
+    //   } else {
+    //     alert('Google route unsuccesfull!');
+    //   }
+    // });
   }
 
 
@@ -211,9 +219,9 @@ angular.module('controllers', [])
     $scope.search.input = result.description;
     $scope.predictions = [];
 
-    $ionicLoading.show({
-      template: 'Searching restaurants near '+result.description+' ...'
-    });
+    // $ionicLoading.show({
+    //   template: 'Searching restaurants near '+result.description+' ...'
+    // });
 
     // With this result we should find restaurants arround this place and then show them in the map
     // First we need to get LatLng from the place ID
@@ -231,10 +239,10 @@ angular.module('controllers', [])
               places_markers = [];
 
           for (var i = 0; i < nearby_places.length; i++) {
-  		      bound.extend(nearby_places[i].geometry.location);
-  		      var place_marker = createMarker(nearby_places[i]);
+            bound.extend(nearby_places[i].geometry.location);
+            var place_marker = createMarker(nearby_places[i]);
             places_markers.push(place_marker);
-  		    }
+          }
 
           // Create cluster with places
           createCluster(places_markers);
