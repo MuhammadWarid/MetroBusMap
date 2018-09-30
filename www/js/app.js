@@ -6,9 +6,10 @@
 angular.module('starter', [
   'ionic',
   'controllers',
-  'services',
+  // 'services',
   'ngCordova',
-  'ngMap'
+  // 'ngMap'
+  'google-maps'
 ])
 
 .run(function($ionicPlatform) {
@@ -35,7 +36,7 @@ angular.module('starter', [
   .state('map', {
     url: '/map',
     templateUrl: "views/map.html",
-    controller: 'MapCtrl'
+    controller: 'MapRouteCtrl'
   })
 
   .state('place', {
